@@ -42,6 +42,9 @@ response = openai.ChatCompletion.create(
 )
 answer = response.choices[0].message.content
 
+if not os.path.exists('output'):
+    os.mkdir('output')
+
 output = filter(lambda x: x.startswith('python'), answer.split('```'))
 # Open the file with write permissions
 with open('output/airflow_dag.py', 'w') as file:

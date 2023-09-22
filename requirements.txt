@@ -1,2 +1,8 @@
 openai
 pandas
+bardapi
+langchain
+langchain_experimental
+psycopg2
+google-auth-oauthlib
+google-api-python-client

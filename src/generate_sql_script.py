@@ -16,9 +16,7 @@ system_prompt = """You are a data engineer looking to create a slowly-changing d
 user_prompt = f"""Using cumulative table input schema {all_schemas['players.sql']}
                     and expected output schema {all_schemas['players_scd_table.sql']} 
                     generate a query to do a slowly-changing dimension 
-                    transformation tracking is_active and scoring_class, 
-                    use current_season for the next records start_date,
-                    overwrite the entire data set each day and don't use the SQL UPDATE keyword
+                    transformation tracking changes on the dimensions is_active and scoring_class, 
                     use markdown and SQL for the transformation
             """
 
@@ -36,6 +34,9 @@ response = openai.ChatCompletion.create(
 print(response)
 answer = response.choices[0].message.content
 
+
+if not os.path.exists('output'):
+    os.mkdir('output')
 
 # ```sql
 # SELECT * FROM table

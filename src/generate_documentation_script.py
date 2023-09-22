@@ -19,6 +19,7 @@ user_prompt = f"""Using cumulative table input schema {all_schemas['players.sql'
                 {all_schemas['player_seasons.sql']}
                 make sure to include example queries that use the season stats array
                 make sure to document all columns with column comments
+                make sure to document all created types as well
             """
 
 print(system_prompt)
@@ -33,6 +34,9 @@ response = openai.ChatCompletion.create(
     temperature=0
 )
 answer = response.choices[0].message.content
+
+if not os.path.exists('output'):
+    os.mkdir('output')
 # Open the file with write permissions
 with open('output/documentation.md', 'w') as file:
     # Write some data to the file
